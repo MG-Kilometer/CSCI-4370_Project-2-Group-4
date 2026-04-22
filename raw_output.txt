@@ -1,0 +1,341 @@
+Loading file...
+File loaded: 5667 rows, 9 columns
+
+============================================================
+DATASET UNDERSTANDING
+============================================================
+
+Dataset: Longotor1delta (Yeast Gene Expression)
+Number of observations: 5667
+Number of columns: 9
+
+Column names: ['Public ID', 'Gene', 'Gene description', 'sch9/wt', 'ras2/wt', 'tor1/wt', None, None, None]
+
+Column Descriptions:
+  - Public ID       : Systematic yeast ORF identifier (e.g. YAL001C)
+  - Gene            : Standard gene name
+  - Gene description: Functional annotation of the gene
+  - sch9/wt         : Log-ratio expression (sch9 knockout vs wild type)
+  - ras2/wt         : Log-ratio expression (ras2 knockout vs wild type)
+  - tor1/wt         : Log-ratio expression (tor1 knockout vs wild type)
+  - Columns 7-9     : Empty columns (all NaN) -- will be dropped
+
+     sch9/wt  |  min=-2.9322  max=4.6033  mean=-0.0048  std=0.4834
+     ras2/wt  |  min=-3.9310  max=5.3685  mean=-0.0529  std=0.6646
+     tor1/wt  |  min=-4.1086  max=3.3432  mean=0.0172  std=0.4533
+
+Preprocessing: selecting numeric columns (sch9/wt, ras2/wt, tor1/wt)...
+  No missing values in the 3 feature columns.
+  Final dataset shape: (5667, 3)
+
+Normalizing features using Min-Max scaling (0 to 1)...
+  Before normalization:
+       sch9/wt  min=-2.9322  max=4.6033
+       ras2/wt  min=-3.9310  max=5.3685
+       tor1/wt  min=-4.1086  max=3.3432
+  After normalization:
+       sch9/wt  min=0.0000  max=1.0000
+       ras2/wt  min=0.0000  max=1.0000
+       tor1/wt  min=0.0000  max=1.0000
+
+============================================================
+EXPERIMENT 1: Optimal cluster count via FPC
+============================================================
+Evaluating FPC across different cluster counts...
+  c=2: FPC=0.7496
+  c=3: FPC=0.6374
+  c=4: FPC=0.5588
+  c=5: FPC=0.4988
+  c=6: FPC=0.4462
+  c=7: FPC=0.4068
+  c=8: FPC=0.3756
+  c=9: FPC=0.3516
+  c=10: FPC=0.3299
+  Saved plot: plots/fcm_fpc_vs_clusters.png
+
+============================================================
+EXPERIMENT 2: FCM with varying k
+============================================================
+Running Fuzzy C-Means: c=2, m=2.0, error=0.005, maxiter=1000
+  Converged in 19 iterations
+  Fuzzy Partition Coefficient (FPC): 0.7496
+  Cluster 0: 2673 members
+  Cluster 1: 2994 members
+
+
+FCM's Internal Validation Methods for k = 2:
+ Calinski-Harabasz Score: 5138.9957
+ Davies-Bouldin Score: 0.8658
+ Silhouette Score: 0.4105
+  Saved plot: plots/fcm_c2_m2.0.png
+  Saved plot: plots/fcm_membership_c2_m2.0.png
+Running Fuzzy C-Means: c=3, m=2.0, error=0.005, maxiter=1000
+  Converged in 34 iterations
+  Fuzzy Partition Coefficient (FPC): 0.6374
+  Cluster 0: 2644 members
+  Cluster 1: 1726 members
+  Cluster 2: 1297 members
+
+
+FCM's Internal Validation Methods for k = 3:
+ Calinski-Harabasz Score: 4720.4710
+ Davies-Bouldin Score: 0.9259
+ Silhouette Score: 0.3465
+  Saved plot: plots/fcm_c3_m2.0.png
+  Saved plot: plots/fcm_membership_c3_m2.0.png
+
+Cluster Membership Sample (up to 10 per cluster):
+------------------------------------------------------------
+
+Cluster 0 (2644 total members):
+       YAL002W  VPS8
+       YAL010C  MDM10
+       YAL013W  DEP1
+       YAL015C  NTG1
+     YAL016C-B  ---
+       YAL016W  TPD3
+       YAL018C  ---
+       YAL020C  ATS1
+       YAL021C  CCR4
+       YAL022C  FUN26
+  ... and 2634 more
+
+Cluster 1 (1726 total members):
+       YAL001C  TFC3
+       YAL011W  SWC3
+       YAL017W  PSK1
+       YAL019W  FUN30
+       YAL041W  CDC24
+       YAL046C  ---
+       YAL054C  ACS1
+       YAL056W  GPB2
+       YAL060W  BDH1
+     YAL064W-B  ---
+  ... and 1716 more
+
+Cluster 2 (1297 total members):
+       YAL003W  EFB1
+       YAL005C  SSA2  SSA1
+       YAL007C  ERP2
+       YAL008W  FUN14
+       YAL009W  SPO7
+       YAL012W  CYS3
+       YAL014C  SYN8
+       YAL026C  DRS2
+       YAL028W  FRT2
+       YAL030W  SNC1
+  ... and 1287 more
+Running Fuzzy C-Means: c=4, m=2.0, error=0.005, maxiter=1000
+  Converged in 38 iterations
+  Fuzzy Partition Coefficient (FPC): 0.5588
+  Cluster 0: 1112 members
+  Cluster 1: 1840 members
+  Cluster 2: 743 members
+  Cluster 3: 1972 members
+
+
+FCM's Internal Validation Methods for k = 4:
+ Calinski-Harabasz Score: 4295.9101
+ Davies-Bouldin Score: 1.0162
+ Silhouette Score: 0.2980
+  Saved plot: plots/fcm_c4_m2.0.png
+  Saved plot: plots/fcm_membership_c4_m2.0.png
+Running Fuzzy C-Means: c=5, m=2.0, error=0.005, maxiter=1000
+  Converged in 56 iterations
+  Fuzzy Partition Coefficient (FPC): 0.4988
+  Cluster 0: 1274 members
+  Cluster 1: 777 members
+  Cluster 2: 1605 members
+  Cluster 3: 493 members
+  Cluster 4: 1518 members
+
+
+FCM's Internal Validation Methods for k = 5:
+ Calinski-Harabasz Score: 3900.6140
+ Davies-Bouldin Score: 1.1248
+ Silhouette Score: 0.2596
+  Saved plot: plots/fcm_c5_m2.0.png
+  Saved plot: plots/fcm_membership_c5_m2.0.png
+============================================================
+EXPERIMENT 3: Effect of fuzziness parameter m
+============================================================
+Evaluating the effect of fuzziness parameter m...
+Running Fuzzy C-Means: c=3, m=1.5, error=0.005, maxiter=1000
+  Converged in 43 iterations
+  Fuzzy Partition Coefficient (FPC): 0.8297
+  Cluster 0: 1732 members
+  Cluster 1: 2852 members
+  Cluster 2: 1083 members
+
+Running Fuzzy C-Means: c=3, m=2.0, error=0.005, maxiter=1000
+  Converged in 28 iterations
+  Fuzzy Partition Coefficient (FPC): 0.6374
+  Cluster 0: 1724 members
+  Cluster 1: 1298 members
+  Cluster 2: 2645 members
+
+Running Fuzzy C-Means: c=3, m=2.5, error=0.005, maxiter=1000
+  Converged in 32 iterations
+  Fuzzy Partition Coefficient (FPC): 0.5125
+  Cluster 0: 2475 members
+  Cluster 1: 1771 members
+  Cluster 2: 1421 members
+
+Running Fuzzy C-Means: c=3, m=3.0, error=0.005, maxiter=1000
+  Converged in 24 iterations
+  Fuzzy Partition Coefficient (FPC): 0.4438
+  Cluster 0: 1815 members
+  Cluster 1: 2347 members
+  Cluster 2: 1505 members
+
+  Saved plot: plots/fcm_m_c3_m1.5.png
+  Saved plot: plots/fcm_m_c3_m2.0.png
+  Saved plot: plots/fcm_m_c3_m2.5.png
+  Saved plot: plots/fcm_m_c3_m3.0.png
+
+Fuzziness Parameter Summary (c=3):
+      m       FPC                   Cluster Sizes
+--------------------------------------------------
+    1.5    0.8297              [1732, 2852, 1083]
+    2.0    0.6374              [1724, 1298, 2645]
+    2.5    0.5125              [2475, 1771, 1421]
+    3.0    0.4438              [1815, 2347, 1505]
+
+============================================================
+EXPERIMENT 4: K-Means optimal cluster count (Elbow Method)
+============================================================
+Evaluating K-Means SSE across cluster counts (distance=L2)...
+  k=2: SSE=38.4088
+  k=3: SSE=27.3872
+  k=4: SSE=21.9784
+  k=5: SSE=21.6922
+  k=6: SSE=17.3097
+  k=7: SSE=16.0845
+  k=8: SSE=15.7607
+  k=9: SSE=14.2008
+  k=10: SSE=13.5407
+  Saved plot: plots/kmeans_elbow_L2.png
+
+============================================================
+EXPERIMENT 5: K-Means with varying k (L2)
+============================================================
+
+--- K-Means k=2, L2 ---
+  SSE: 38.4088
+
+KMeans' Internal Validation Methods for k = 2: 
+ Calinski-Harabasz Score: 5137.4447
+ Davies-Bouldin Score: 0.8656
+ Silhouette Score: 0.4103
+  Cluster 0: 2697 members
+  Cluster 1: 2970 members
+  Saved plot: plots/kmeans_k2_L2.png
+
+--- K-Means k=3, L2 ---
+  SSE: 38.1102
+
+KMeans' Internal Validation Methods for k = 3: 
+ Calinski-Harabasz Score: 2610.5466
+ Davies-Bouldin Score: 0.6164
+ Silhouette Score: 0.4105
+  Cluster 0: 2697 members
+  Cluster 1: 1 members
+  Cluster 2: 2969 members
+  Saved plot: plots/kmeans_k3_L2.png
+
+K-Means Cluster Membership Sample (up to 10 per cluster):
+------------------------------------------------------------
+
+Cluster 0 (2697 total members):
+       YAL003W  EFB1
+       YAL005C  SSA2  SSA1
+       YAL007C  ERP2
+       YAL008W  FUN14
+       YAL009W  SPO7
+       YAL012W  CYS3
+       YAL013W  DEP1
+       YAL014C  SYN8
+       YAL015C  NTG1
+       YAL020C  ATS1
+  ... and 2687 more
+
+Cluster 1 (1 total members):
+       YJR066W  TOR1
+
+Cluster 2 (2969 total members):
+       YAL001C  TFC3
+       YAL002W  VPS8
+       YAL010C  MDM10
+       YAL011W  SWC3
+     YAL016C-B  ---
+       YAL016W  TPD3
+       YAL017W  PSK1
+       YAL018C  ---
+       YAL019W  FUN30
+       YAL023C  PMT2
+  ... and 2959 more
+
+--- K-Means k=4, L2 ---
+  SSE: 27.0956
+
+KMeans' Internal Validation Methods for k = 4: 
+ Calinski-Harabasz Score: 3215.6600
+ Davies-Bouldin Score: 0.7066
+ Silhouette Score: 0.3574
+  Cluster 0: 2909 members
+  Cluster 1: 1 members
+  Cluster 2: 1510 members
+  Cluster 3: 1247 members
+  Saved plot: plots/kmeans_k4_L2.png
+
+--- K-Means k=5, L2 ---
+  SSE: 19.0371
+
+KMeans' Internal Validation Methods for k = 5: 
+ Calinski-Harabasz Score: 4031.5665
+ Davies-Bouldin Score: 1.0154
+ Silhouette Score: 0.2924
+  Cluster 0: 1999 members
+  Cluster 1: 1430 members
+  Cluster 2: 1448 members
+  Cluster 3: 472 members
+  Cluster 4: 318 members
+  Saved plot: plots/kmeans_k5_L2.png
+
+============================================================
+EXPERIMENT 6: K-Means distance metric comparison (k=3)
+============================================================
+
+--- K-Means k=3, L1 ---
+  Error: 483.1466
+  Cluster 0: 2442 members
+  Cluster 1: 1484 members
+  Cluster 2: 1741 members
+  Saved plot: plots/kmeans_k3_L1.png
+
+--- K-Means k=3, L2 ---
+  Error: 27.3863
+  Cluster 0: 2908 members
+  Cluster 1: 1247 members
+  Cluster 2: 1512 members
+  Saved plot: plots/kmeans_k3_L2.png
+
+Comparing Internal Validation Results:
+ Method     k     Silhouette     Davies-Bouldin     Calinski-Harabasz
+-----------------------------------------------------------------------------------------
+ KMeans  2  0.4103  0.8656 5137.4447
+ KMeans  3  0.4105  0.6164 2610.5466
+ KMeans  4  0.3574  0.7066 3215.6600
+ KMeans  5  0.2924  1.0154 4031.5665
+ FCM  2  0.4105  0.8658 5138.9957
+ FCM  3  0.3465  0.9259 4720.4710
+ FCM  4  0.2980  1.0162 4295.9101
+ FCM  5  0.2596  1.1248 3900.6140
+
+============================================================
+Program Finished
+============================================================
+
+All plots saved to: /content/plots
+
+
