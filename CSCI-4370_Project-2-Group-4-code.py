@@ -343,7 +343,7 @@ def k_means_clustering(k, iter_lim, threshold, distance_method, data):
 
         for j in range(data_dimensions):
 
-            cluster.append((random.random()*2)-1)
+            cluster.append(random.random())
 
         cluster_positions.append(cluster)
 
